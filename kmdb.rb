@@ -279,7 +279,7 @@ role["actor_id"] = Actor.find_by({"name" => "Anne Hathaway"})["id"]
 role.save
 
 puts "There are #{Role.all.count} character roles"
-all_actors = Role.all
+all_roles = Role.all
 
 puts ""
 puts ""
@@ -322,4 +322,22 @@ puts ""
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
 
+# films = Movie.all
+# moviestudios = Studio.all
+# puts films.inspect
+# puts moviestudios.inspect
 
+for film in films
+    for all_actor in all_actors
+
+    movie = films.find_by({"id" => film["id"]})
+    actor = all_actors.find_by({"id"=> all_actor["id"],})
+    character = all_roles.find_by ({"movie_id" => film["id"],"actor_id"=>all_actor["id"]})
+
+    title = movie["title"]
+    actor = actor["name"]
+    role = character["character_name"]
+
+    puts "#{title}  --  #{actor}  --  #{role}"
+end
+end
