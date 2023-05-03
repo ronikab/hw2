@@ -92,6 +92,7 @@ new_studio.save #insert into the table
 # puts new_studio.inspect
 
 WarnerBros = Studio.find_by({"name" => "Warner Bros."})
+all_studios = Studio.all
 
 # --------------------------------------------------------------------------#
 # --------------------------------------------------------------------------#
@@ -298,9 +299,9 @@ moviestudios = Studio.all
 # puts films.inspect
 # puts moviestudios.inspect
 
-for film in films
-    movie = films.find_by({"id" => film["id"]})
-    studio_ = moviestudios.find_by({"id" => film["studio_id"]})
+for film in all_movies
+    movie = all_movies.find_by({"id" => film["id"]})
+    studio_ = all_studios.find_by({"id" => film["studio_id"]})
 
     title = movie["title"]
     year_released = movie["year_released"]
@@ -322,22 +323,16 @@ puts ""
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
 
-# films = Movie.all
-# moviestudios = Studio.all
-# puts films.inspect
-# puts moviestudios.inspect
 
-for film in films
-    for all_actor in all_actors
+for cast in all_roles
 
-    movie = films.find_by({"id" => film["id"]})
-    actor = all_actors.find_by({"id"=> all_actor["id"],})
-    character = all_roles.find_by ({"movie_id" => film["id"],"actor_id"=>all_actor["id"]})
-
+    movie = Movie.find_by({"id" => cast["movie_id"]})
     title = movie["title"]
-    actor = actor["name"]
-    role = character["character_name"]
 
-    puts "#{title}  --  #{actor}  --  #{role}"
-end
+    actor = Actor.find_by({"id"=> cast["actor_id"]})
+    actor_name = actor["name"]
+
+    role = cast["character_name"]
+
+    puts "#{title}  --  #{actor_name}  --  #{role}"
 end
