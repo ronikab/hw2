@@ -89,7 +89,7 @@ new_studio= Studio.new
 # puts new_studio.inspect
 new_studio["name"]="Warner Bros."
 new_studio.save #insert into the table
-puts new_studio.inspect
+# puts new_studio.inspect
 
 WarnerBros = Studio.find_by({"name" => "Warner Bros."})
 
@@ -127,7 +127,7 @@ dkr = Movie.find_by({"title" => "The Dark Knight Rises"})
 puts "There are #{Movie.all.count} movies"
 
 all_movies = Movie.all
-puts all_movies.inspect
+# puts all_movies.inspect
 
 # --------------------------------------------------------------------------#
 # --------------------------------------------------------------------------#
@@ -177,9 +177,9 @@ actor = Actor.new
 actor["name"]="Anne Hathaway"
 actor.save
 
-puts "There are #{Actor.all.count} movies"
+puts "There are #{Actor.all.count} actors"
 all_actors = Actor.all
-puts all_actors.inspect
+# puts all_actors.inspect
 
 # --------------------------------------------------------------------------#
 # --------------------------------------------------------------------------#
@@ -278,6 +278,12 @@ role["movie_id"] = dkr["id"]
 role["actor_id"] = Actor.find_by({"name" => "Anne Hathaway"})["id"]
 role.save
 
+puts "There are #{Role.all.count} character roles"
+all_actors = Role.all
+
+puts ""
+puts ""
+
 
 # Prints a header for the movies output
 puts "Movies"
@@ -288,22 +294,26 @@ puts ""
 # TODO!
 
 films = Movie.all
+moviestudios = Studio.all
 # puts films.inspect
+# puts moviestudios.inspect
 
 for film in films
     movie = films.find_by({"id" => film["id"]})
-    title = movie["title"]
-    year = movie["year_released"]
-    rating = movie["rated"]
-    
-    studio_line= Studio.find_by({"id" => films["studio_id"]})
-    studio_name = studio_line["name"]
+    studio_ = moviestudios.find_by({"id" => film["studio_id"]})
 
-   puts "#{title}   --  #{year}   --  #{rating}   --  #{studio_name}"
+    title = movie["title"]
+    year_released = movie["year_released"]
+    rating = movie["rated"]
+
+    studio_name = studio_["name"]
+
+    puts "#{title}  --  #{year_released}  --  #{rating}  --  #{studio_name}"
 end
 
 
 # Prints a header for the cast output
+puts ""
 puts ""
 puts "Top Cast"
 puts "========"
